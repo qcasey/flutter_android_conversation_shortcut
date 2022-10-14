@@ -17,7 +17,7 @@ class AndroidConversationShortcut {
           await _channel.invokeMethod('createConversationShortcut', {
         'personName': person.name,
         'personKey': person.key,
-        'personIcon': person.icon?.icon,
+        'personIcon': person.icon?.data,
         'personBot': person.bot,
         'personImportant': person.important,
         'personUri': person.uri,

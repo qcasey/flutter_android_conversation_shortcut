@@ -13,13 +13,14 @@ class AndroidConversationShortcut {
       throw ArgumentError.notNull('Person key and name must not be null');
     }
     try {
-      Uint8List _iconBytes = person.icon?.data as Uint8List;
+      Uint8List? _iconBytes = person.icon?.data as Uint8List?;
 
       final String? shortcutID =
           await _channel.invokeMethod('createConversationShortcut', {
         'personName': person.name,
         'personKey': person.key,
-        'personIcon': String.fromCharCodes(_iconBytes),
+        'personIcon':
+            _iconBytes != null ? String.fromCharCodes(_iconBytes) : null,
         'personBot': person.bot,
         'personImportant': person.important,
         'personUri': person.uri,

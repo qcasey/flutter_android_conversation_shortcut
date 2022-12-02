@@ -15,23 +15,13 @@ class AndroidConversationShortcut {
       throw ArgumentError.notNull('Person key and name must not be null');
     }
     try {
-      Uint8List? _iconBytes = person.icon?.data as Uint8List?;
-
-      String fileName = '${person.key}.png';
-
-      final directory = await getApplicationDocumentsDirectory();
-      String filePath = '${directory.path}/$fileName';
-
-      File file = File(filePath);
-      if (_iconBytes != null) {
-        file.writeAsBytesSync(_iconBytes);
-      }
+      String filePath = person.icon?.data as String;
 
       final String? shortcutID =
           await _channel.invokeMethod('createConversationShortcut', {
         'personName': person.name,
         'personKey': person.key,
-        'personIcon': file.path,
+        'personIcon': filePath,
         'personBot': person.bot,
         'personImportant': person.important,
         'personUri': person.uri,
